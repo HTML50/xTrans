@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="css/default.css" />
+<link rel="stylesheet" type="text/css" href="css/component.css" />
+<link rel="stylesheet" type="text/css" href="css/animations.css" />
+<style>
+div {margin:0 auto}
+#qrcode {width:512px;margin-top:50px}
+#input-box{opacity:.3;transition:opacity 1s;position:fixed}
+#input-box:hover {opacity:1;transition:opacity 1s;}
+textarea {width:calc(60% - 2px);margin-top:50px;height:25%;font-size:3em;color:#000;position:fixed;left:20%;bottom:70px;border-color:#fff;transition:border-color 1s;}
+textarea:hover {border-color:#ccc;transition:border-color 1s;}
+.open-input-btn {z-index:99999998;width:10%;left:45%;bottom:0px;opacity:.3;transition:opacity 1s;}
+.open-input-btn:hover{opacity:1;transition:opacity 1s;}
+#init {text-align:center;font-size: 20px;}
+.hidden {display:none;}
+</style>
+<script src="js/modernizr.custom.js"></script>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/qrcode.min.js"></script>
+<script src="js/xPrompt.js"></script>
+</head>
+<body>
+
+<div id="pt-main" class="pt-perspective">
+<div id="onlyGetByIdCanChangeHTML" class="pt-page pt-page-1"><div id="init"><br><input type='text' id='this-page-URL' value='' style="opacity:0;width:2px">
+<input type='text' id='initID-box' value='null' onfocus="saveURL(this)"><span>单击ID复制地址</span><!--这里不要换行，若换，则input的下一个兄弟元素就变成了换行，而不是span-->
+<div id="qrcode"></div></div></div>	
+</div>
+
+
+<div id='control-btn' class='hidden'>
+<div id="last-iterateEffects" class="last-page-btn"><span>‹</span></div>
+<div id="next-iterateEffects" class="next-page-btn"><span>›</span></div>	
+</div>
+<input id="open-input-btn" type='button' value='open input' class="pt-touch-button open-input-btn hidden" onclick="openInput()">
+<div id="input-box" class="hidden">
+<textarea id="input" placeholder="在此粘贴或者输入需要传输的文字"></textarea><br>
+<input id="input-btn" type='button' value='submit' class="pt-touch-button" onclick="submit()">
+</div>
+
+
+<script src="js/pagetransitions.js"></script>
+<script src="js/func.js"></script>
+</body>
+</html>

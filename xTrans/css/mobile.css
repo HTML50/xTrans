@@ -1,0 +1,56 @@
+@media screen and (max-width: 500px) {
+body{
+	font-size:1em;
+}	
+
+#input-box{
+	opacity:.5;
+}
+	
+.pt-page {
+font-size:2em;
+}
+
+.pt-page-1 {
+	font-size:1em;
+	background: #ccc;
+	color:#000;
+}
+
+
+.pt-page div{
+	padding: 5%;
+	
+}
+
+
+.pt-page h1 {
+	font-size:2em;
+	line-height:2em;
+	text-transform: uppercase;
+}
+
+
+
+
+
+
+
+.next-page-btn{
+	width:50px;
+}
+.next-page-btn span{
+	right:0%;
+	font-size:10em;
+}
+
+.last-page-btn{
+	width:50px;
+}
+.last-page-btn span{
+	left:0%;
+	font-size:10em;
+}
+
+
+}
