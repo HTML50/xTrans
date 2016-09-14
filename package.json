@@ -4,7 +4,7 @@
   "description": "the simplest way to transfer message (maybe files) between PCs and Mobiles",
   "main": "http.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node http.js"
   },
   "repository": {
     "type": "git",
