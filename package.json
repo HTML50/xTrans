@@ -1,0 +1,20 @@
+{
+  "name": "xTrans",
+  "version": "1.0.0",
+  "description": "the simplest way to transfer message (maybe files) between PCs and Mobiles",
+  "main": "http.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HTML50/xTrans.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HTML50/xTrans/issues"
+  },
+  "homepage": "https://github.com/HTML50/xTrans#readme"
+}
