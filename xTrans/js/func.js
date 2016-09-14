@@ -2,7 +2,7 @@ var ID,
 xmlHttp,
 intervalID,
 lastMsg,
-hostIP='http://192.168.1.104/',
+hostIP='https://xtrans.herokuapp.com/',
 pageCount=1,
 //消息页面的页数
 
