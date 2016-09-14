@@ -146,5 +146,5 @@ var server = http.createServer(function (request, response) {
 });
 
 // 让服务器监听80端口:
-server.listen(80);
+server.listen(process.env.PORT);
 log('Server is running at http://127.0.0.1/');

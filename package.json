@@ -4,14 +4,14 @@
   "description": "the simplest way to transfer message (maybe files) between PCs and Mobiles",
   "main": "http.js",
   "scripts": {
-    "test": "echo 'test'"
+    "start": "node http.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HTML50/xTrans.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "2byte
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/HTML50/xTrans/issues"
