@@ -102,12 +102,12 @@ var server = http.createServer(function (request, response) {
 	 //GET method request
 	 else{
 		 
-	var filepath = "./xTrans"+url.parse(request.url).pathname.toLowerCase();
+	var filepath = "./xTrans"+url.parse(request.url).pathname;
 	var queryStr = url.parse(request.url).query;
 	
 	fs.stat(filepath, function (err, stats) {
 
-			if(filepath=='./xTrans/index.html' || filepath=='./xTrans/'){
+			if(filepath.toLowerCase()=='./xTrans/index.html' || filepath=='./xTrans/'){
 						if(queryStr!==null){
 								if (queryStr.indexOf('id')==0){
 									
@@ -148,5 +148,5 @@ var server = http.createServer(function (request, response) {
 });
 
 // 让服务器监听80端口:
-server.listen(process.env.PORT);
+server.listen(80);
 log('Server is running');
