@@ -107,7 +107,7 @@ var server = http.createServer(function (request, response) {
 	
 	fs.stat(filepath, function (err, stats) {
 
-			if(filepath.toLowerCase()=='./xTrans/index.html' || filepath=='./xTrans/'){
+			if(filepath.toLowerCase()=='./xtrans/index.html' || filepath=='./xTrans/'){
 						if(queryStr!==null){
 								if (queryStr.indexOf('id')==0){
 									
@@ -148,5 +148,5 @@ var server = http.createServer(function (request, response) {
 });
 
 // 让服务器监听80端口:
-server.listen(80);
+server.listen(process.env.PORT);
 log('Server is running');
