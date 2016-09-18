@@ -3,12 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="icon" href="favicon.ico" type="/image/x-icon" />
+		<link rel="shortcut icon" href="favicon.ico" type="/image/x-icon" />
 <link rel="stylesheet" type="text/css" href="css/default.css" />
 <link rel="stylesheet" type="text/css" href="css/component.css" />
 <link rel="stylesheet" type="text/css" href="css/animations.css" />
 <style>
 div {margin:0 auto}
-#qrcode {width:512px;margin-top:50px}
+#qrcode {width:512px;margin-top:10px;}
 #input-box{opacity:.3;transition:opacity 1s;position:fixed}
 #input-box:hover {opacity:1;transition:opacity 1s;}
 textarea {width:calc(60% - 2px);margin-top:50px;height:25%;font-size:3em;color:#000;position:fixed;left:20%;bottom:70px;border-color:#fff;transition:border-color 1s;}
@@ -26,7 +28,7 @@ textarea:hover {border-color:#ccc;transition:border-color 1s;}
 <body>
 
 <div id="pt-main" class="pt-perspective">
-<div id="onlyGetByIdCanChangeHTML" class="pt-page pt-page-1"><div id="init"><br><input type='text' id='this-page-URL' value='' style="opacity:0;width:2px">
+<div id="onlyGetByIdCanChangeHTML" class="pt-page pt-page-1"><div id="init"><br><img src='xTrans.png' width="200px"><br><input type='text' id='this-page-URL' value='' style="opacity:0;width:2px">
 <input type='text' id='initID-box' value='null' onfocus="saveURL(this)"><span>单击ID复制地址</span><!--这里不要换行，若换，则input的下一个兄弟元素就变成了换行，而不是span-->
 <div id="qrcode"></div></div></div>	
 </div>

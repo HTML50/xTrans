@@ -60,6 +60,10 @@
 	font-size:3em;
 	color:#000;
 }
+.pt-page-1 div{
+	padding-top:0;
+	padding-bottom:0;
+}
 
 .pt-page-2 {
 	background: #7bb7fa;

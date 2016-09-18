@@ -5,7 +5,7 @@ lastMsg,
 hostIP='https://xtrans.herokuapp.com/',
 pageCount=1,
 //消息页面的页数
-
+qrWidth=512,qrHeight=512,
 isInputOpened = false;
 //开启输入
 
@@ -68,7 +68,6 @@ if(data.indexOf('getMsg')==0 && xmlHttp.responseText!=lastMsg &&xmlHttp.response
 else if(data.indexOf('getOnline')==0 && (xmlHttp.responseText=='true')){
 	
 	document.getElementById("qrcode").remove();
-	$("#open-input-btn").removeClass("hidden");
 	clearInterval(intervalID)	
 	setReadMsg(ID);
 }
@@ -92,8 +91,8 @@ function initID(){
 	
 	new QRCode(document.getElementById("qrcode"), {
 	text: hostIP+"index.html?id="+ID,
-	width: 512,
-	height: 512,
+	width: qrWidth,
+	height: qrHeight,
 	colorDark : "#000000",
 	colorLight : "#ffffff",
 	correctLevel : QRCode.CorrectLevel.H
@@ -108,6 +107,14 @@ function setReadMsg(ID){
 	$('#control-btn').removeClass("hidden");
 	$('#init').remove();
 	$('#onlyGetByIdCanChangeHTML').html("<div><h1>PC:</h1><p>PC端直接按Ctrl+V，将直接提交粘贴板中的内容；默认关闭PC端的输入界面，可点击按钮开启，进行编辑；</p><h1>手机：</h1><p>由于手机系统权限，无法通过浏览器使用摇动粘贴功能，只能在输入界面粘贴、发送；手机端下载app可进行全局摇动上传。</p></div>");
+	if(qrHeight==300){
+	$('#input-box').removeClass("hidden");
+	$('#input').focus();  
+	isInputOpened = true;
+	}else{
+		$("#open-input-btn").removeClass("hidden");
+	}
+	
 	
 	intervalID=setInterval(function(){
 	ajaxPost('getMsg※'+ID+'※null');
@@ -202,7 +209,7 @@ document.getElementById('input').value='';
 $('#input').focus();
 }
 else{
-	xPrompt('quiz','oops, check your submit plz~')
+	xPrompt('quiz','请检查提交内容')
 }
 }
 
@@ -284,24 +291,29 @@ $("#open-input-btn").removeClass("hidden");
 }
 
 
-//有ID，手机： 扫描二维码后的手机
-else if(ID!==null &&!isPC()){
-loadCSS('css/mobile.css');	
+//手机
+else if(!isPC()){
+qrWidth=300;
+qrHeight=300;	
+loadCSS('css/mobile.css');
+if(ID!==null){
 setReadMsg(ID);
-$('#input-box').removeClass("hidden");
+}
+else{
+	initID();
+}
+
 // 监听传感器运动事件
 if (window.DeviceMotionEvent) {
     window.addEventListener('devicemotion', deviceMotionHandler, false);
 } else {
     alert('浏览器太旧，不支持摇一摇，请使用最新谷歌浏览器');
 } 
-$('#input').focus();  
-isInputOpened = true;
 }
 
 
 //没有ID，PC ： 初始二维码页面
-else if(ID===null && isPC()){
+else if(ID==null && isPC()){
 initID();
 }
 

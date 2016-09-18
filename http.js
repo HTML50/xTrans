@@ -102,44 +102,46 @@ var server = http.createServer(function (request, response) {
 	 //GET method request
 	 else{
 		 
-	var filepath = "./xTrans"+url.parse(request.url).pathname;
+	var filepath = "./xTrans"+url.parse(request.url).pathname.toLowerCase();
 	var queryStr = url.parse(request.url).query;
 	
 	fs.stat(filepath, function (err, stats) {
-		
-		
-        if (!err && stats.isFile()) {
-			if(filepath=='./xTrans/index.html'){
-				if(queryStr!==null){
-						if (queryStr.indexOf('id')==0){
+
+			if(filepath=='./xTrans/index.html' || filepath=='./xTrans/'){
+						if(queryStr!==null){
+								if (queryStr.indexOf('id')==0){
+									
+								//房间号
+								var requestID=queryStr.substr(3)
+								if(userMap.get(requestID)===undefined){
+									userMap.set(requestID,false)
+									log('a room has created! ID : '+requestID)
+								}
+								else{
+									userMap.set(requestID,true)
+									log('somebody joined this room ID : '+requestID)
+								}
+							}
 							
-							//房间号
-						var requestID=queryStr.substr(3)
-						if(userMap.get(requestID)===undefined){
-							userMap.set(requestID,false)
-							log('a room has created! ID : '+requestID)
 						}
-						else{
-							userMap.set(requestID,true)
-							log('somebody joined this room ID : '+requestID)
-						}
-					}
-					
-				}
+			response.writeHead(200);
+			fs.createReadStream('./xTrans/index.html').pipe(response);
 			}
-           
-        response.writeHead(200);
-		fs.createReadStream(filepath).pipe(response);
-		 
+           else{
+			           if (!err && stats.isFile()) {
+		   response.writeHead(200);
+				fs.createReadStream(filepath).pipe(response);
         } else {
 
             response.writeHead(404);
             response.end('404 Not Found');
 			
         }
+			 
+		   }
+
     });
 	 }
-	
 
 	//log(request.method + ': ' + request.url);
 	
@@ -147,4 +149,4 @@ var server = http.createServer(function (request, response) {
 
 // 让服务器监听80端口:
 server.listen(process.env.PORT);
-log('Server is running at http://127.0.0.1/');
+log('Server is running');
