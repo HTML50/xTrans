@@ -20,6 +20,7 @@ textarea:hover {border-color:#ccc;transition:border-color 1s;}
 #init {text-align:center;font-size: 20px;}
 .hidden {display:none;}
 </style>
+<script>var current=0,pagesCount=1;</script>
 <script src="js/modernizr.custom.js"></script>
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/qrcode.min.js"></script>
@@ -28,7 +29,7 @@ textarea:hover {border-color:#ccc;transition:border-color 1s;}
 <body>
 
 <div id="pt-main" class="pt-perspective">
-<div id="onlyGetByIdCanChangeHTML" class="pt-page pt-page-1"><div id="init"><br><img src='xTrans.png' width="200px"><br><input type='text' id='this-page-URL' value='' style="opacity:0;width:2px">
+<div class="pt-page pt-page-1"><div id="init"><br><img src='xTrans.png' width="200px"><br><input type='text' id='this-page-URL' value='' style="opacity:0;width:2px">
 <input type='text' id='initID-box' value='null' onfocus="saveURL(this)"><span>单击ID复制地址</span><!--这里不要换行，若换，则input的下一个兄弟元素就变成了换行，而不是span-->
 <div id="qrcode"></div></div></div>	
 </div>

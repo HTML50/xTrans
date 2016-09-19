@@ -6,7 +6,7 @@ var PageTransitions = (function() {
 		$nextIterate = $( '#next-iterateEffects' ),
 		animcursor,
 		pagesCount = $pages.length,
-		current = 0,
+		//current = 0,
 		isAnimating = false,
 		endCurrPage = false,
 		endNextPage = false,
@@ -39,7 +39,7 @@ var PageTransitions = (function() {
 			$forward='last';
 		} );
 		
-		$nextIterate.on( 'click', function() {
+		$nextIterate.on('click', function() {
 			$pages = $main.children( 'div.pt-page' );
 			pagesCount = $pages.length
 			animcursor = Math.floor(Math.random()*66+1)
@@ -70,7 +70,6 @@ var PageTransitions = (function() {
 		var $nextPage = $pages.eq( current ).addClass( 'pt-page-current' );
 			
 		selectEffect(animation)
-
 		custom($currPage,$nextPage)
 
 	}
@@ -93,9 +92,7 @@ var PageTransitions = (function() {
 		}
 	
 		$nextPage = $pages.eq( current ).addClass( 'pt-page-current' );
-			
 		selectEffect(animation)
-
 		custom($currPage,$nextPage)
 
 	}
@@ -115,9 +112,7 @@ var PageTransitions = (function() {
 		}
 		
 		else if( current==pagesCount-1 && $forward=='last'){
-			//$outpage.attr( 'class', 'pt-page pt-page-1');
-			//$inpage.attr( 'class', 'pt-page pt-page-'+(pagesCount)+' pt-page-current' );
-			
+
 			$outpage.attr( 'class', 'pt-page pt-page-1');
 			$inpage.attr( 'class', 'pt-page pt-page-'+(pagesCount)+' pt-page-current');
 		}
@@ -434,7 +429,5 @@ var PageTransitions = (function() {
 	}
 
 	init();
-
-	return { init : init };
 
 })();

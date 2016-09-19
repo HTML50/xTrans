@@ -3,19 +3,19 @@ xmlHttp,
 intervalID,
 lastMsg,
 hostIP='https://xtrans.herokuapp.com/',
-pageCount=1,
-//消息页面的页数
 qrWidth=512,qrHeight=512,
 isInputOpened = false;
 //开启输入
-
 
 // 定义一个摇动的阈值
 var shakeThreshold = 4000,lastUpdate = 0; // 记录上一次摇动的时间
 var x, y, z, lastX, lastY, lastZ; // 定义x、y、z记录三个轴的数据以及上一次触发的数据
 
-
 var log = console.log;
+
+
+
+
 
 function createxmlHttpRequest() { 
 if (window.ActiveXObject) { 
@@ -47,21 +47,30 @@ xmlHttp.send(data);
 xmlHttp.onreadystatechange = function() { 
 if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) { 
 if(data.indexOf('getMsg')==0 && xmlHttp.responseText!=lastMsg &&xmlHttp.responseText!=''){
-	pageCount++;
+	pagesCount++;
+	
+	
 	var newMsgDiv = document.createElement('div');
-	newMsgDiv.setAttribute('class','pt-page pt-page-'+pageCount)
+	newMsgDiv.setAttribute('class','pt-page pt-page-'+pagesCount)
 	newMsgDiv.innerHTML = "<div></div>";
 	newMsgDiv.childNodes[0].innerText =xmlHttp.responseText;
-	  newMsgDiv.addEventListener("click",function(){
+	newMsgDiv.addEventListener("click",function(){
 	autoCopy(this.childNodes[0].innerText);
   }); 
-
 	document.getElementById('pt-main').appendChild(newMsgDiv); 
-  
-
+	
+	
+	if(current!=pagesCount-2 && pagesCount!=2){
+		$('.pt-page-'+(current+1)).removeClass('pt-page-current')
+		//log('需要删除的元素 .pt-page-'+current)
+		
+		current = pagesCount-2
+		
+		$('.pt-page-'+current+1).addClass('pt-page-current')
+		//log('需要添加的元素 .pt-page-'+(current+1))
+	}
 	
 	$( '#next-iterateEffects' ).click()
-	
 	lastMsg=xmlHttp.responseText;
 	
 }
@@ -106,12 +115,16 @@ function setReadMsg(ID){
 	
 	$('#control-btn').removeClass("hidden");
 	$('#init').remove();
-	$('#onlyGetByIdCanChangeHTML').html("<div><h1>PC:</h1><p>PC端直接按Ctrl+V，将直接提交粘贴板中的内容；默认关闭PC端的输入界面，可点击按钮开启，进行编辑；</p><h1>手机：</h1><p>由于手机系统权限，无法通过浏览器使用摇动粘贴功能，只能在输入界面粘贴、发送；手机端下载app可进行全局摇动上传。</p></div>");
 	if(qrHeight==300){
+	
+	$('.pt-page-1').html("<div><h1>操作：</h1><p>在输入界面粘贴文本或自行输入，点击submit发送或者摇一摇发送</p><p>点击收到的信息可直接复制。</p></div>");
+	
 	$('#input-box').removeClass("hidden");
 	$('#input').focus();  
 	isInputOpened = true;
 	}else{
+		$('.pt-page-1').html("<div><h1>操作:</h1><p>按Ctrl+V，直接提交粘贴板中的内容<br>点击收到的信息可直接复制<br>默认关闭PC端的输入界面，回车发送；shift+回车换行</p></div>");
+	
 		$("#open-input-btn").removeClass("hidden");
 	}
 	
@@ -163,6 +176,7 @@ function deviceMotionHandler(eventData) {
 		   }
 		   
 		   submit();
+		   //尽管摇动手机也是自主操作，仍然无法模拟复制 粘贴
         }
  
         lastX = x;
@@ -317,6 +331,33 @@ else if(ID==null && isPC()){
 initID();
 }
 
+
+var isShiftDown=false;
+$('#input').bind('keydown', function(event) {
+		if (event.keyCode == "16") {
+		isShiftDown=true;
+		}
+	});
+
+	$('#input').bind('keyup', function(event) {
+		if (event.keyCode == "16") {
+		isShiftDown=false;	
+		}
+	});
+
+$('#input').bind('keypress', function(event) {
+		if (event.keyCode == "13") {
+			//回车执行查询
+			
+			if(!isShiftDown){
+			event.preventDefault();
+			submit();
+			}
+			
+		}
+	});
+
+
   function getClipboardText(event){
     var clipboardData = event.clipboardData || window.clipboardData;
     return clipboardData.getData("text");
@@ -330,8 +371,12 @@ initID();
 	$('#input').val(text);
 	submit();
 	}
+	else if(isInputOpened && isPC()){
+		event.preventDefault();
+		$('#input').val(text);
+		submit();
+	}
   }, false);	
   
 
 }
-
