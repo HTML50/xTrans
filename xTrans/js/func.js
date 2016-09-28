@@ -1,8 +1,8 @@
-var ID,
+﻿var ID,
 xmlHttp,
 intervalID,
 lastMsg,
-hostIP='https://xtrans.herokuapp.com/',
+hostIP='http://192.168.1.104/',
 qrWidth=512,qrHeight=512,
 isInputOpened = false;
 //开启输入
@@ -323,6 +323,14 @@ if (window.DeviceMotionEvent) {
 } else {
     alert('浏览器太旧，不支持摇一摇，请使用最新谷歌浏览器');
 } 
+
+//防止手机输入时，输入框被挡住
+$('input[type="text"],textarea').on('click', function () {
+  var target = this;
+  setTimeout(function(){
+        target.scrollIntoViewIfNeeded();
+      },400);
+});
 }
 
 
